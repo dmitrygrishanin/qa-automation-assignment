@@ -51,6 +51,11 @@ RESTful Booker coverage:
 - JSON schema validation
 - basic field validation
 
+Hygraph GraphQL coverage:
+
+- positive query for companies with logo data
+- negative query for invalid company field validation
+
 ### Part 2: UI Tests
 
 Option A: Form + Web Tables.
@@ -86,6 +91,36 @@ API + UI coverage:
 - delete created booking through API cleanup
 
 ## Run Tests
+
+Run REST API tests:
+
+```bash
+mvn test -Dtest=AuthenticationTest,BookingApiTest
+```
+
+Run Hygraph GraphQL tests:
+
+```bash
+mvn test -Dtest=GraphQlApiTest
+```
+
+Run Practice Form UI test:
+
+```bash
+mvn test -Dtest=FormTest
+```
+
+Run Web Tables UI test:
+
+```bash
+mvn test -Dtest=WebTableTest
+```
+
+Run integration test:
+
+```bash
+mvn test -Dtest=ApiUiIntegrationTest
+```
 
 Run all tests:
 
