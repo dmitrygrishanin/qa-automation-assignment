@@ -23,6 +23,14 @@ public final class ApiHelper {
                 .build();
     }
 
+    public static RequestSpecification hygraphGraphQlRequest() {
+        return new RequestSpecBuilder()
+                .setBaseUri(TestConfig.HYGRAPH_GRAPHQL_BASE_URL)
+                .setContentType(ContentType.JSON)
+                .setAccept("application/json")
+                .build();
+    }
+
     public static String getAuthToken() {
         return authenticate(TestConfig.BOOKER_USERNAME, TestConfig.BOOKER_PASSWORD)
                 .then()
@@ -112,5 +120,18 @@ public final class ApiHelper {
                 .queryParam("checkout", checkout)
                 .when()
                 .get("/booking");
+    }
+
+    public static Response executeHygraphGraphQl(String query) {
+        return executeHygraphGraphQl(query, Map.of());
+    }
+
+    public static Response executeHygraphGraphQl(String query, Map<String, Object> variables) {
+        return RestAssured
+                .given()
+                .spec(hygraphGraphQlRequest())
+                .body(Map.of("query", query, "variables", variables))
+                .when()
+                .post();
     }
 }
